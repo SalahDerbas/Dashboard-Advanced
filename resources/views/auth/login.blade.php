@@ -1,13 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="keywords" content="HTML5 Template" />
-    <meta name="description" content="Webmin - Bootstrap 4 & Angular 5 Admin Dashboard Template" />
-    <meta name="author" content="potenzaglobalsolutions.com" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title> {{ trans('auth.title') }} </title>
 
     <!-- Favicon -->
@@ -18,121 +12,188 @@
         href="https://fonts.googleapis.com/css?family=Poppins:200,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900">
 
     <!-- css -->
-    <link href="{{ URL::asset('assets/css/rtl.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('auth/css/styles.css') }}" rel="stylesheet">
 
 </head>
 
 <body>
 
-    <div class="wrapper">
+<div id="container" class="container">
+		<!-- FORM SECTION -->
+		<div class="row">
+			<!-- SIGN UP -->
+			<div class="col align-items-center flex-col sign-up">
+				<div class="form-wrapper align-items-center">
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+					<div class="form sign-up">
+						<div class="input-group">
+							<i class='bx bxs-user'></i>
+							<input  id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                            name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="{{ trans('auth.name')}}">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
 
-        <!--=================================
- preloader -->
+						</div>
+						<div class="input-group">
+							<i class='bx bx-mail-send'></i>
+							<input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                             name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="{{ trans('auth.Email')}}">
+                             @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
 
-        <div id="pre-loader">
-            <img src="images/pre-loader/loader-01.svg" alt="">
-        </div>
+						</div>
+						<div class="input-group">
+							<i class='bx bxs-lock-alt'></i>
+							<input t id="password" type="password" class="form-control @error('password') is-invalid @enderror"
+                             name="password" required autocomplete="new-password" placeholder="{{ trans('auth.Password')}}">
+                             @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
 
-        <!--=================================
- preloader -->
+						</div>
+						<div class="input-group">
+							<i class='bx bxs-lock-alt'></i>
+							<input id="password-confirm" type="password" class="form-control"
+                             name="password_confirmation" required autocomplete="new-password" placeholder="{{ trans('auth.Confirm_password')}} ">
+						</div>
+						<button>
+							{{ trans('auth.Sign_up') }}
+						</button>
 
-        <!--=================================
- login-->
+        </form>
+						<p>
+							<span>
+                            {{ trans('auth.already_exists') }}
+							</span>
+							<b onclick="toggle()" class="pointer">
+                            {{ trans('auth.Sign_in_here') }}
+							</b>
+						</p>
+					</div>
+				</div>
 
-        <section class="height-100vh d-flex align-items-center page-section-ptb login"
-            style="background-image: url(assets/images/login-bg.jpg);">
-            <div class="container">
-                <div class="row justify-content-center no-gutters vertical-align">
-                    <div class="col-lg-4 col-md-6 login-fancy-bg bg"
-                        style="background-image: url(images/login-inner-bg.jpg);">
-                        <div class="login-fancy">
-                            <h3 class="text-white mb-20">{{ trans('auth.title')}}</h3>
-                            <p class="mb-20 text-white">{{ trans('auth.descriptions')}}</p>
+			</div>
+			<!-- END SIGN UP -->
+			<!-- SIGN IN -->
+			<div class="col align-items-center flex-col sign-in">
+				<div class="form-wrapper align-items-center">
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+					<div class="form sign-in">
+						<div class="input-group">
+							<i class='bx bxs-user'></i>
+							<input type="email" placeholder="{{ trans('auth.Email') }}"
+                            class="form-control @error('email') is-invalid @enderror"
+                            id="email" name="email"  value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+						</div>
+						<div class="input-group">
+							<i class='bx bxs-lock-alt'></i>
+							<input id="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    required autocomplete="current-password" placeholder="{{ trans('auth.Password') }}">
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
 
-                            </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 bg-white">
-                        <div class="login-fancy pb-40 clearfix">
-                            <h3 class="mb-30">{{ trans('auth.Login') }} </h3>
+						</div>
+						<button>
+                        {{ trans('auth.Submit') }}
+						</button>
+						<p>
+							<b>
+                                <a href="{{ route('forget_password')}}">
+                                {{ trans('auth.ForgetPassword') }}
+                                </a>
+							</b>
+						</p>
+						<p>
+							<span>
+                            {{ trans('auth.Dont_account') }}
 
-                            <form method="POST" action="{{ route('login') }}">
-                                @csrf
 
-                                <div class="section-field mb-20">
-                                    <label class="mb-10" for="name">{{ trans('auth.Email') }} </label>
-                                    <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+							</span>
+							<b onclick="toggle()" class="pointer">
+                            {{ trans('auth.Sign_up_here') }}
+							</b>
+						</p>
+					</div>
+                </form>
 
-                                </div>
 
-                                <div class="section-field mb-20">
-                                    <label class="mb-10" for="Password">{{ trans('auth.Password') }} </label>
-                                    <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="current-password">
+				</div>
+				<div class="form-wrapper">
 
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+				</div>
+			</div>
+			<!-- END SIGN IN -->
+		</div>
+		<!-- END FORM SECTION -->
+		<!-- CONTENT SECTION -->
+		<div class="row content-row">
+			<!-- SIGN IN CONTENT -->
+			<div class="col align-items-center flex-col">
+				<div class="text sign-in">
+					<h2>
+						{{trans('auth.title')}}
+					</h2>
 
-                                </div>
-                                <div class="section-field">
-                                    <div class="remember-checkbox mb-30">
-                                        <input type="checkbox" class="form-control" name="two" id="two" />
-                                        <a href="#" class="float-right">{{ trans('auth.ForgetPassword') }} </a>
-                                    </div>
-                                </div>
-                                <button class="button"><span>{{ trans('auth.Submit') }} </span><i class="fa fa-check"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+				</div>
+				<div class="img sign-in">
 
-        <!--=================================
- login-->
+				</div>
+			</div>
+			<!-- END SIGN IN CONTENT -->
+			<!-- SIGN UP CONTENT -->
+			<div class="col align-items-center flex-col">
+				<div class="img sign-up">
 
-    </div>
-    <!-- jquery -->
-    <script src="{{ URL::asset('assets/js/jquery-3.3.1.min.js') }}"></script>
-    <!-- plugins-jquery -->
-    <script src="{{ URL::asset('assets/js/plugins-jquery.js') }}"></script>
-    <!-- plugin_path -->
-    <script>
-        var plugin_path = 'js/';
+				</div>
+				<div class="text sign-up">
+					<h2>
+						{{ trans('auth.Join')}}
+					</h2>
 
+				</div>
+			</div>
+			<!-- END SIGN UP CONTENT -->
+		</div>
+		<!-- END CONTENT SECTION -->
+	</div>
+
+
+
+    @yield('js')
+
+
+    <script type="text/javascript">
+        let container = document.getElementById('container')
+
+        toggle = () => {
+            container.classList.toggle('sign-in')
+            container.classList.toggle('sign-up')
+        }
+
+        setTimeout(() => {
+            container.classList.add('sign-in')
+        }, 200)
     </script>
 
-    <!-- chart -->
-    <script src="{{ URL::asset('assets/js/chart-init.js') }}"></script>
-    <!-- calendar -->
-    <script src="{{ URL::asset('assets/js/calendar.init.js') }}"></script>
-    <!-- charts sparkline -->
-    <script src="{{ URL::asset('assets/js/sparkline.init.js') }}"></script>
-    <!-- charts morris -->
-    <script src="{{ URL::asset('assets/js/morris.init.js') }}"></script>
-    <!-- datepicker -->
-    <script src="{{ URL::asset('assets/js/datepicker.js') }}"></script>
-    <!-- sweetalert2 -->
-    <script src="{{ URL::asset('assets/js/sweetalert2.js') }}"></script>
-    <!-- toastr -->
-    @yield('js')
-    <script src="{{ URL::asset('assets/js/toastr.js') }}"></script>
-    <!-- validation -->
-    <script src="{{ URL::asset('assets/js/validation.js') }}"></script>
-    <!-- lobilist -->
-    <script src="{{ URL::asset('assets/js/lobilist.js') }}"></script>
-    <!-- custom -->
-    <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
 
 </body>
 

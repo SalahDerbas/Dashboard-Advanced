@@ -22,5 +22,18 @@ return [
     'Password' => 'Password',
     'ForgetPassword' => 'Forget Password',
     'Submit' => 'Submit',
-    
+    'name' => 'Name' ,
+    'Confirm_password' => 'Confirm Password',
+    'Sign_up' => 'Sign up',
+    'already_exists' => 'Already have an account?',
+    'Sign_in_here' => 'Sign in here',
+    'Sign_up_here' => 'Sign up here',
+    'Dont_account' => 'Dont have an account?',
+    'Join' => 'Join with us',
+    'can_reset_password' => 'You can reset your password here.',
+    'reset_password' => 'Reset Password',
+    'Go_To_login' => 'Go To Login',
+
+
+
 ];

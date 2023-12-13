@@ -9,6 +9,11 @@ class WebsiteController extends Controller
 {
     public function index()
     {
-        return view('welcome');
+        return view('Website.home');
+    }
+
+    public function contact_us()
+    {
+        return view('Website.Pages.contact');
     }
 }
