@@ -25,6 +25,15 @@ header start-->
                 </div>
             </div>
         </li>
+
+        @can('Log_Viewer')
+        <li class="nav-item">
+            <a class="nav-link"  href="{{ route('logs') }}" target="_blank"  style="margin:9px;background-color:#f8f9fa;color:black;padding:14px;" role="button">
+            {{trans('main_trans.Log_Viewer')}}
+        </a>
+        </li >
+       @endcan
+
     </ul>
     <!-- top bar right -->
     <ul class="nav navbar-nav ml-auto">
@@ -57,23 +66,38 @@ header start-->
                 <i class="ti-bell"></i>
                 <span class="badge badge-danger notification-status"> </span>
             </a>
+
+            @can('Notifications')
+
+
             <div class="dropdown-menu dropdown-menu-right dropdown-big dropdown-notifications">
                 <div class="dropdown-header notifications">
                     <strong>{{trans('Sidebar_trans.Notifications')}}</strong>
-                    <span class="badge badge-pill badge-warning">05</span>
+                    <span class="badge badge-pill badge-warning">{{ Auth::user()->unreadnotifications->count() }}</span>
                 </div>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">New registered user <small
-                        class="float-right text-muted time">Just now</small> </a>
-                <a href="#" class="dropdown-item">New invoice received <small
-                        class="float-right text-muted time">22 mins</small> </a>
-                <a href="#" class="dropdown-item">Server error report<small
-                        class="float-right text-muted time">7 hrs</small> </a>
-                <a href="#" class="dropdown-item">Database report<small class="float-right text-muted time">1
-                        days</small> </a>
-                <a href="#" class="dropdown-item">Order confirmation<small class="float-right text-muted time">2
-                        days</small> </a>
+                @foreach(Auth::user()->unreadNotifications as $unreadnotification)
+                <a href="{{ url('/') }}/readNotification/{{$unreadnotification->id}}" class="dropdown-item" style="background: #3baaa8; color: #fff !important;">
+                        <i class="fa fa-envelope mr-2"></i> {{ $unreadnotification->data['data'] }}
+                        <span class="float-right text-sm text-white">{{ date('Y-m-d', strtotime($unreadnotification->created_at )) }}</span>
+                        <br>
+                        <i class="fa fa-user"></i> &nbsp; {{ $unreadnotification->data['firstname'] }}
+                        <div class="dropdown-divider"></div>
+                    </a>
+                @endforeach
+                @foreach(Auth::user()->readNotifications as $readnotification)
+                    <a href="#" class="dropdown-item">
+                        <i class="fa fa-envelope mr-2"></i> {{ $readnotification->data['data'] }}
+                        <span class="float-right text-sm text-dark">{{ date('Y-m-d', strtotime($readnotification->created_at )) }}</span>
+                        <br>
+                        <i class="fa fa-user"></i> &nbsp; {{ $readnotification->data['firstname'] }}
+                    </a>
+                    <div class="dropdown-divider"></div>
+                @endforeach
+
             </div>
+
+            @endcan
         </li>
         <li class="nav-item dropdown ">
             <a class="nav-link top-nav" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
@@ -117,15 +141,21 @@ header start-->
                         </div>
                     </div>
                 </div>
+                @can('Profile')
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#"><i class="text-secondary ti-reload"></i>Activity</a>
-                <a class="dropdown-item" href="#"><i class="text-success ti-email"></i>Messages</a>
-                <a class="dropdown-item" href="#"><i class="text-warning ti-user"></i>Profile</a>
-                <a class="dropdown-item" href="#"><i class="text-dark ti-layers-alt"></i>Projects <span
-                        class="badge badge-info">6</span> </a>
+                <a class="dropdown-item" href="{{ route('Dashboard.Users.getProfile')}}"><i class="text-warning ti-user"></i>Profile</a>
+                @endcan
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#"><i class="text-info ti-settings"></i>Settings</a>
-                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="text-danger ti-unlock"></i>{{ __('Sidebar_trans.Logoff') }}</a>
+                @can('Settings')
+                <a class="dropdown-item" href="{{ route('Dashboard.Settings.index')}}"><i class="text-info ti-settings"></i>Settings</a>
+                @endcan
+                @can('Reset_Password')
+                <div class="dropdown-divider"></div>
+                <a href="{{ route('Dashboard.Users.resetPassword') }}" class="dropdown-item">
+                    <i class="text-warning ti-user"></i> {{trans('main_trans.Reset_Password')}}
+                </a>
+                @endcan
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="text-danger ti-unlock"></i>{{ __('Sidebar_trans.Logout') }}</a>
                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
                 </form>

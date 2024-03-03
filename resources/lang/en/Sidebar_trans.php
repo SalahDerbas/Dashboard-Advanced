@@ -3,7 +3,7 @@
 return [
 
     'Notifications' => 'Notifications',
-    'Logoff' => 'Logoff',
+    'Logout' => 'Logout',
 
 
 

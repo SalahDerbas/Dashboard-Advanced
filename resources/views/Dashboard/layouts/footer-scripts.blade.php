@@ -44,3 +44,46 @@
     <script src="{{ URL::asset('assets/js/bootstrap-datatables/ar/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/js/bootstrap-datatables/ar/dataTables.bootstrap4.min.js') }}"></script>
 @endif
+
+
+
+@if(Session::has('message'))
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.success("{{ session('message') }}");
+    </script>
+@endif
+
+@if(Session::has('error'))
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.error("{{ session('error') }}");
+    </script>
+@endif
+
+@if(Session::has('info'))
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.info("{{ session('info') }}");
+    </script>
+@endif
+
+@if(Session::has('warning'))
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.warning("{{ session('warning') }}");
+    </script>
+@endif
+
