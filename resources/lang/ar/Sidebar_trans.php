@@ -3,6 +3,6 @@
 return [
 
     'Notifications' => 'الاشعارات',
-    'Logoff' => 'تسجيل خروج',
+    'Logout' => 'تسجيل خروج',
 
 ];

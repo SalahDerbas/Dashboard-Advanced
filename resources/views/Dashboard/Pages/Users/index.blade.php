@@ -102,7 +102,13 @@ Users - Dashboard
                                                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete{{$User->id}}"> {{ trans('main_trans.Delete_User')}}</a>
                                                     @endcan
                                                     @can('Activate_User')
-                                                        <a class="dropdown-item" href="{{ route('Dashboard.Users.activate',['id'=>$User->id]) }}">  {{ trans('main_trans.Activate_User')}}</a>
+                                                        <a class="dropdown-item" href="{{ route('Dashboard.Users.activate',['id'=>$User->id]) }}">
+                                                        @if($User->status == "Active")
+                                                        {{ trans('main_trans.Inativate_User')}}
+                                                        @else
+                                                        {{ trans('main_trans.Activate_User')}}
+                                                        @endif
+                                                    </a>
                                                     @endcan
                                                 </div>
                                             </div>

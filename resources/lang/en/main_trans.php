@@ -88,6 +88,8 @@ return [
     'Add_Role' => 'Add Role',
     'Delete_Role' => 'Delete Role',
     'Update_Role' => 'Update Role',
+    'Inativate_User' => 'Inativate User',
+    'Profile' => 'Profile',
 
 
 

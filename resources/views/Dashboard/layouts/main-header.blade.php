@@ -143,11 +143,11 @@ header start-->
                 </div>
                 @can('Profile')
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{ route('Dashboard.Users.getProfile')}}"><i class="text-warning ti-user"></i>Profile</a>
+                <a class="dropdown-item" href="{{ route('Dashboard.Users.getProfile')}}"><i class="text-warning ti-user"></i>{{ trans('main_trans.Profile')}}</a>
                 @endcan
                 <div class="dropdown-divider"></div>
                 @can('Settings')
-                <a class="dropdown-item" href="{{ route('Dashboard.Settings.index')}}"><i class="text-info ti-settings"></i>Settings</a>
+                <a class="dropdown-item" href="{{ route('Dashboard.Settings.index')}}"><i class="text-info ti-settings"></i>{{ trans('main_trans.Settings')}}</a>
                 @endcan
                 @can('Reset_Password')
                 <div class="dropdown-divider"></div>
