@@ -1,6 +1,6 @@
-# Live chat between users and the admin
+# Dashboard Advance For admin
 
-### Project Real Time Chat Application in Laravel Livewire between User Group  
+### Project Dashboard Advance in Laravel  For Admin  
 
 
 # ⚙️ Used Technologies
