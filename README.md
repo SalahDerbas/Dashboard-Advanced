@@ -18,7 +18,7 @@
 This project is a complete admin control panel that contains many basic functions that are repeated in every project that is worked on from the beginning. The functions are as follows:
 
 1. Authorization and admin registration processes for the control panel
-2. Complete user management ()
+2. Complete user management (CRUDS)
 3. Managing roles and powers
 4. Settings
 5. Reports
@@ -26,7 +26,7 @@ This project is a complete admin control panel that contains many basic function
 7. Password Reset
 8. Manage notifications to users
 9. Web notifications
-10. Arabic and English language support ()
+10. Arabic and English language support (LTR - RTL)
 11. Coordinating all Front End codes with JavaScript, Bootstrap, and CSS
 12. Rudimentary website support to start the project
 
